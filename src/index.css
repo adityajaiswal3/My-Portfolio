@@ -419,6 +419,137 @@ section {
   background: rgba(255, 152, 0, 0.1);
 }
 
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff9800;
+}
+
+.contact-row h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: white;
+  font-weight: bold;
+}
+
+.contact-row p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-family: var(--font-mono);
+}
+
+.contact-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.social-btn {
+  border: 1px solid #ff9800;
+  color: #ff9800;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.social-btn:hover {
+  background: rgba(255, 152, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.contact-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.contact-input:focus {
+  outline: none;
+  border-color: #ff9800;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.form-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  color: #000;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.form-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.email-btn {
+  background: #ff9800;
+}
+
+.whatsapp-btn {
+  background: #128c7e;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .contact-grid, .form-row, .form-buttons {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid-2 {
     grid-template-columns: 1fr;

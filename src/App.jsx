@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, Twitter, Linkedin, Mail, ArrowRight, ExternalLink, Code2, Cpu, Globe, Layout, Palette, Terminal, Award } from 'lucide-react'
+import { Github, Twitter, Linkedin, Mail, ArrowRight, ExternalLink, Code2, Cpu, Globe, Layout, Palette, Terminal, Award, MapPin, Phone, MessageCircle } from 'lucide-react'
 import Experience from './components/Experience'
 import { AnimeNavBarDemo } from './components/ui/anime-navbar-demo'
 
@@ -151,27 +151,36 @@ const StackSkillCard = ({ name, percentage }) => {
   );
 };
 
-const ProjectImageCard = ({ title, subtitle, image, link, buttonText = "View Project" }) => (
+const ProjectImageCard = ({ title, subtitle, image, link, buttonText = "View Project", description }) => (
   <motion.div
-    className="project-image-wrapper"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    onClick={() => link && window.open(link, '_blank')}
-    onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
-    onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
+    style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}
   >
-    <div className="project-bg" style={{ backgroundImage: `url(${image})` }} />
-    <div className="project-overlay" />
-    <div className="project-content">
-      <h3 className="project-image-title">{title}</h3>
-      <p className="project-image-subtitle">{subtitle}</p>
-      {link ? (
-        <button className="project-view-btn">{buttonText}</button>
-      ) : (
-        <button className="project-view-btn" style={{ visibility: 'hidden' }}>{buttonText}</button>
-      )}
+    <div
+      className="project-image-wrapper"
+      onClick={() => link && window.open(link, '_blank')}
+      onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
+      onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
+    >
+      <div className="project-bg" style={{ backgroundImage: `url(${image})` }} />
+      <div className="project-overlay" />
+      <div className="project-content">
+        <h3 className="project-image-title">{title}</h3>
+        <p className="project-image-subtitle">{subtitle}</p>
+        {link ? (
+          <button className="project-view-btn">{buttonText}</button>
+        ) : (
+          <button className="project-view-btn" style={{ visibility: 'hidden' }}>{buttonText}</button>
+        )}
+      </div>
     </div>
+    {description && (
+      <div style={{ color: 'var(--text-muted)', lineHeight: '1.6', fontSize: '0.9rem', padding: '0 0.5rem', textAlign: 'justify' }}>
+        {description}
+      </div>
+    )}
   </motion.div>
 );
 
@@ -281,12 +290,12 @@ const App = () => {
               <div style={{ padding: '1rem 0' }}>
                 <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>2023 — CURRENT</p>
                 <h4 style={{ fontSize: '1.5rem', marginTop: '0.5rem' }}>BTech — Computer Science & Engineering</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Lovely Professional University (CGPA: 6.75)</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Lovely Professional University </p>
               </div>
               <div style={{ padding: '1rem 0', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                 <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>2021 — 2023</p>
                 <h4 style={{ fontSize: '1.2rem', marginTop: '0.5rem' }}>Intermediate (Science)</h4>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>SKMRD College, Patna (74.2%)</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>SKMRD College, Patna </p>
               </div>
             </div>
           </div>
@@ -301,12 +310,14 @@ const App = () => {
               subtitle="Advanced DSA Project"
               image="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80"
               link="https://github.com/adityajaiswal3/Hospital-Patient-Record-System"
+              description="Developed a highly optimized, structured patient management system that efficiently handles sensitive medical records and appointment scheduling. By utilizing advanced data structures, it ensures real-time updates and seamless O(log n) retrieval of medical history. The modular architecture improves system reliability and focuses on strict error-handling and efficient memory utilization."
             />
             <ProjectImageCard
               title="Building Materials Store"
               subtitle="E-Commerce System"
               image="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
               link="https://github.com/adityajaiswal3/-building-materials-project"
+              description="Engineered a scalable e-commerce platform dedicated to managing and selling building materials through an interactive web interface. The robust backend, handled via PHP and HTML, ensures a smooth shopping experience and inventory tracking. It is targeted at maximizing user-experience while simplifying operations for material vendors."
             />
             <ProjectImageCard
               title="CyberSec Symposium 2.0"
@@ -314,6 +325,7 @@ const App = () => {
               image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
               link="https://www.lpu.in"
               buttonText="View Details"
+              description="Actively participated in North India's largest cybersecurity conference, delving deep into advanced network security and ethical hacking challenges. Engaged in hands-on workshops alongside top-tier professionals to gain practical insights into the evolving landscape of digital security and data protection strategies."
             />
           </div>
         </section>
@@ -321,7 +333,7 @@ const App = () => {
         {/* CERTIFICATIONS SECTION */}
         <section id="certifications">
           <div className="hero-tag">CERTIFIED</div>
-          <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Credentials</h2>
+          <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Certifications</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             <div
               className="card"
@@ -385,7 +397,7 @@ const App = () => {
         {/* STACK SECTION */}
         <section id="stack">
           <div className="hero-tag">STACK</div>
-          <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Tech Arsenal</h2>
+          <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Technical Skills</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }}>
             {skillsData.map(skill => (
               <StackSkillCard key={skill.name} name={skill.name} percentage={skill.percentage} />
@@ -394,41 +406,65 @@ const App = () => {
         </section>
 
         {/* CONNECT SECTION */}
-        <section id="connect">
-          <div className="hero-tag">CONNECT</div>
-          <h2 style={{ fontSize: '6vw', marginBottom: '2rem', textAlign: 'center' }} className="outline">Contact.</h2>
-
-          <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 5rem' }}>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', lineHeight: '1.6' }}>
-              Currently seeking <strong>Software Engineering Internships</strong> for Summer 2025.
-            </p>
+        <section id="connect" style={{ padding: '5rem 5%', minHeight: 'auto', marginBottom: '8rem', marginTop: '5rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', display: 'inline-block', fontWeight: '800', letterSpacing: '-1px' }}>
+              Contact <span style={{ color: '#ff9800', background: 'rgba(255,152,0,0.1)', padding: '5px 20px', borderRadius: '12px' }}>Me</span>
+            </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '5rem' }}>
-            <div>
-              <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>EMAIL</p>
-              <a
-                href="mailto:adityajaiswal947043@gmail.com"
-                style={{ color: 'white', textDecoration: 'none', fontSize: '1rem' }}
-                onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
-                onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
-              >
-                adityajaiswal947043@gmail.com
-              </a>
-            </div>
-            <div>
-              <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>PHONE</p>
-              <p style={{ fontSize: '1.2rem' }}>+91 90068 87516</p>
-            </div>
-            <div>
-              <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>LOCATION</p>
-              <p style={{ fontSize: '1.2rem' }}>Phagwara, Punjab</p>
-            </div>
-          </div>
+          <div className="contact-grid">
+            {/* Left Panel */}
+            <div className="contact-info">
+              <div className="contact-row">
+                <div className="contact-icon"><MapPin size={24} /></div>
+                <div>
+                  <h4>Location</h4>
+                  <p>Phagwara, Punjab</p>
+                </div>
+              </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '5rem', flexWrap: 'wrap' }}>
-            <motion.a href="https://github.com/adityajaiswal3" target="_blank" className="card" style={{ padding: '1rem 2rem', textDecoration: 'none', color: 'white', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }} whileHover={{ borderColor: 'var(--accent-cyan)', color: 'var(--accent-cyan)' }} onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))} onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}>GITHUB</motion.a>
-            <motion.a href="https://www.linkedin.com/in/aditya-jaiswal-b046b4283/" target="_blank" className="card" style={{ padding: '1rem 2rem', textDecoration: 'none', color: 'white', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }} whileHover={{ borderColor: 'var(--accent-cyan)', color: 'var(--accent-cyan)' }} onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))} onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}>LINKEDIN</motion.a>
+              <div className="contact-row">
+                <div className="contact-icon"><Mail size={24} /></div>
+                <div>
+                  <h4>Email</h4>
+                  <p>adityajaiswal947043@gmail.com</p>
+                </div>
+              </div>
+
+              <div className="contact-row">
+                <div className="contact-icon"><Phone size={24} /></div>
+                <div>
+                  <h4>Phone</h4>
+                  <p>+91 90068 87516</p>
+                </div>
+              </div>
+
+              <div className="contact-socials">
+                <a href="https://www.linkedin.com/in/aditya-jaiswal-b046b4283/" target="_blank" className="social-btn">LinkedIn</a>
+                <a href="https://github.com/adityajaiswal3" target="_blank" className="social-btn">GitHub</a>
+                <a href="#" className="social-btn">Twitter</a>
+              </div>
+            </div>
+
+            {/* Right Panel */}
+            <div className="contact-form">
+              <div className="form-row">
+                <input type="text" placeholder="Your Name" className="contact-input" />
+                <input type="email" placeholder="Your Email" className="contact-input" />
+              </div>
+              <input type="text" placeholder="Subject" className="contact-input" />
+              <textarea placeholder="Your Message" rows="5" className="contact-input" />
+
+              <div className="form-buttons">
+                <button className="form-btn email-btn" onClick={() => window.open('mailto:adityajaiswal947043@gmail.com')}>
+                  <Mail size={18} style={{ marginRight: '8px' }} /> Send via Email
+                </button>
+                <button className="form-btn whatsapp-btn" onClick={() => window.open('https://wa.me/919006887516', '_blank')}>
+                  <MessageCircle size={18} style={{ marginRight: '8px' }} /> Send via WhatsApp
+                </button>
+              </div>
+            </div>
           </div>
         </section>
       </main>
