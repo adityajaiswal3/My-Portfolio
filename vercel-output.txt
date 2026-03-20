@@ -1,0 +1,117 @@
+﻿node.exe : Retrieving 
+projectΓÇª
+At C:\Users\adity\AppData\Roa
+ming\npm\vercel.ps1:24 char:5
++     & "node$exe"  "$basedir
+/node_modules/vercel/dist/vc.
+js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (Retriev  
+  ing projectΓÇª:String) [   
+ ], RemoteException
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+Deploying adityajaiswal3s-pro
+jects/my-portfolio
+Uploading 
+[--------------------] 
+(0.0B/477B)
+Uploading 
+[====================] 
+(477.0B/477B)
+Inspect: https://vercel.com/a
+dityajaiswal3s-projects/my-po
+rtfolio/GYwx8zCyhwSLgGDCsyJUK
+DYgBXsZ [3s]
+Production: https://my-portfo
+lio-qisbgkp96-adityajaiswal3s
+-projects.vercel.app [3s]
+Building...
+Building...
+Building: Running build in 
+Washington, D.C., USA (East) 
+ΓÇô iad1
+Building: Build machine 
+configuration: 2 cores, 8 GB
+Building: Retrieving list of 
+deployment files...
+Building: Previous build 
+caches not available.
+Building: Downloading 21 
+deployment files...
+Building: Running "vercel 
+build"
+Building: Vercel CLI 50.32.4
+Building: Installing 
+dependencies...
+Building: added 133 packages 
+in 7s
+Building: 22 packages are 
+looking for funding
+Building: run `npm fund` for 
+details
+Building: Running "npm run 
+build"
+Building: > portfolio@1.0.0 
+build
+Building: > vite build
+Building: vite v8.0.0 
+building client environment 
+for production...
+Building: transforming...Γ£ô 
+2689 modules transformed.
+Building: rendering chunks...
+Building: computing gzip 
+size...
+Building: dist/index.html    
+                 0.91 kB Γöé 
+gzip:   0.50 kB
+Building: dist/assets/index-0
+0DCrOWI.css     34.26 kB Γöé 
+gzip:   6.34 kB
+Building: dist/assets/index-D
+oCN38hM.js   1,314.56 kB Γöé 
+gzip: 376.83 kB
+Building: [plugin 
+builtin:vite-reporter]
+Building: (!) Some chunks 
+are larger than 500 kB after 
+minification. Consider:
+Building: - Using dynamic 
+import() to code-split the 
+application
+Building: - Use build.rolldow
+nOptions.output.codeSplitting
+ to improve chunking: https:/
+/rolldown.rs/reference/Output
+Options.codeSplitting
+Building: - Adjust chunk 
+size limit for this warning 
+via 
+build.chunkSizeWarningLimit.
+Building: Γ£ô built in 1.61s
+Building: Build Completed in 
+/vercel/output [9s]
+Building: Deploying 
+outputs...
+[2K[1A[2K[GProduction: ht
+tps://my-portfolio-qisbgkp96-
+adityajaiswal3s-projects.verc
+el.app [19s]
+Completing...
+Aliased: https://my-portfolio
+-alpha-ten-46.vercel.app 
+[19s]
+
+Common next commands:
+- `vercel inspect my-portfoli
+o-qisbgkp96-adityajaiswal3s-p
+rojects.vercel.app --logs`
+- `vercel redeploy my-portfol
+io-qisbgkp96-adityajaiswal3s-
+projects.vercel.app`
+https://my-portfolio-qisbgkp96-adityajaiswal3s-projects.vercel.app

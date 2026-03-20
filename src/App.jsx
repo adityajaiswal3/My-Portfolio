@@ -88,6 +88,93 @@ const CustomCursor = () => {
   );
 };
 
+const skillsData = [
+  { name: 'C++', percentage: 92 },
+  { name: 'JAVA', percentage: 88 },
+  { name: 'PYTHON', percentage: 85 },
+  { name: 'REACT', percentage: 90 },
+  { name: 'NODE.JS', percentage: 84 },
+  { name: 'MYSQL', percentage: 89 },
+  { name: 'GIT', percentage: 95 },
+  { name: 'PHP', percentage: 80 }
+];
+
+const StackSkillCard = ({ name, percentage }) => {
+  const [clicked, setClicked] = useState(false);
+
+  return (
+    <motion.div
+      className="card"
+      style={{ padding: '1.5rem', cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
+      onClick={() => setClicked(!clicked)}
+      whileTap={{ scale: 0.95 }}
+      onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
+      onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
+    >
+      <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', transition: 'all 0.3s ease' }}>
+        <p style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: clicked ? 'bold' : 'normal', color: clicked ? '#000' : 'var(--text-main)', transition: 'color 0.3s ease', width: '100%', textAlign: clicked ? 'left' : 'center' }}>
+          {name}
+        </p>
+        <AnimatePresence>
+          {clicked && (
+            <motion.p
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', fontWeight: '800', color: '#000', position: 'absolute', right: 0 }}
+            >
+              {percentage}%
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <AnimatePresence>
+        {clicked && (
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${percentage}%` }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              height: '100%',
+              background: 'var(--accent-cyan)',
+              zIndex: 1,
+            }}
+          />
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+const ProjectImageCard = ({ title, subtitle, image, link, buttonText = "View Project" }) => (
+  <motion.div
+    className="project-image-wrapper"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    onClick={() => link && window.open(link, '_blank')}
+    onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
+    onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
+  >
+    <div className="project-bg" style={{ backgroundImage: `url(${image})` }} />
+    <div className="project-overlay" />
+    <div className="project-content">
+      <h3 className="project-image-title">{title}</h3>
+      <p className="project-image-subtitle">{subtitle}</p>
+      {link ? (
+        <button className="project-view-btn">{buttonText}</button>
+      ) : (
+        <button className="project-view-btn" style={{ visibility: 'hidden' }}>{buttonText}</button>
+      )}
+    </div>
+  </motion.div>
+);
+
 const App = () => {
   const [loading, setLoading] = useState(true)
 
@@ -156,16 +243,24 @@ const App = () => {
           <h2 style={{ fontSize: '10vw', marginBottom: '5rem' }}>The Profile</h2>
           <div className="grid-2">
             <div>
-              <div
+              <a
+                href="/cv.pdf"
+                download="Aditya_Jaiswal_CV.pdf"
                 className="profile-image-container"
                 onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
                 onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
               >
-                <img src="/aditya.png" alt="Aditya Jaiswal" />
-                <div style={{ position: 'absolute', bottom: '-20px', left: '0', background: 'var(--bg-color)', padding: '5px 10px', color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', fontSize: '0.7rem' }}>
+                <div className="image-wrapper">
+                  <img src="/aditya.png" alt="Aditya Jaiswal" />
+                  <div className="cv-overlay">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                    <span>DOWNLOAD CV</span>
+                  </div>
+                </div>
+                <div className="profile-label">
                   ADITYA JAISWAL
                 </div>
-              </div>
+              </a>
               <p style={{ marginTop: '3rem', color: 'var(--text-muted)', lineHeight: '1.8', fontSize: '1.1rem' }}>
                 I'm <strong>Aditya Jaiswal</strong>, a Computer Science Engineering student specialized in <strong>Data Structures, Algorithms, and Object-Oriented Programming</strong>. Currently pursuing BTech at <strong>Lovely Professional University</strong>.
               </p>
@@ -201,27 +296,24 @@ const App = () => {
         <section id="experience">
           <h2 style={{ fontSize: '8vw', marginBottom: '5rem' }}>Projects &<br />Success</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
-            <ExperienceCard
-              type="PROJECT / DSA"
+            <ProjectImageCard
               title="Hospital Patient Record System"
               subtitle="Advanced DSA Project"
-              date="Jun 2025"
-              description="Built a structured management system utilizing optimized data structures for O(log n) search and retrieval. Focused on efficient memory management and modular architecture."
+              image="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80"
+              link="https://github.com/adityajaiswal3/Hospital-Patient-Record-System"
             />
-            <ExperienceCard
-              type="PROJECT / WEB"
+            <ProjectImageCard
               title="Building Materials Store"
-              subtitle="E-Commerce & Management System"
-              date="Recent"
-              description="Developed a platform for managing and selling building materials using HTML and PHP. Focused on scalable architecture and user experience."
+              subtitle="E-Commerce System"
+              image="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
               link="https://github.com/adityajaiswal3/-building-materials-project"
             />
-            <ExperienceCard
-              type="ACHIEVEMENT"
+            <ProjectImageCard
               title="CyberSec Symposium 2.0"
-              subtitle="North India's Largest Cyber Conference"
-              date="Apr 2024"
-              description="Participated in high-level discussions and workshops on network security and ethical hacking at LPU."
+              subtitle="Cyber Conference @ LPU"
+              image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
+              link="https://www.lpu.in"
+              buttonText="View Details"
             />
           </div>
         </section>
@@ -231,15 +323,33 @@ const App = () => {
           <div className="hero-tag">CERTIFIED</div>
           <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Credentials</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            <div className="card" style={{ padding: '2rem' }}>
+            <div
+              className="card"
+              style={{ padding: '2rem', cursor: 'pointer' }}
+              onClick={() => window.open('/oracle_certificate.pdf', '_blank')}
+              onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
+              onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
+            >
               <Award color="var(--accent-cyan)" size={32} style={{ marginBottom: '1rem' }} />
               <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Generative AI Professional</h3>
-              <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>ORACLE · Sep 2025</p>
+              <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                ORACLE · Sep 2025
+                <ExternalLink size={12} />
+              </p>
             </div>
-            <div className="card" style={{ padding: '2rem' }}>
+            <div
+              className="card"
+              style={{ padding: '2rem', cursor: 'pointer' }}
+              onClick={() => window.open('/nptel_certificate.pdf', '_blank')}
+              onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
+              onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
+            >
               <Cpu color="var(--accent-cyan)" size={32} style={{ marginBottom: '1rem' }} />
               <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Cloud Computing</h3>
-              <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>NPTEL · Mar 2025</p>
+              <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                NPTEL · Mar 2025
+                <ExternalLink size={12} />
+              </p>
             </div>
             <div
               className="card"
@@ -249,7 +359,7 @@ const App = () => {
               onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
             >
               <Globe color="var(--accent-cyan)" size={32} style={{ marginBottom: '1rem' }} />
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>The Bits and Bytes of Computer Networking</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Computer Networking</h3>
               <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 GOOGLE · Sep 2024
                 <ExternalLink size={12} />
@@ -263,7 +373,7 @@ const App = () => {
               onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
             >
               <Terminal color="var(--accent-cyan)" size={32} style={{ marginBottom: '1rem' }} />
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Introduction to Hardware and Operating Systems</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Operating  System</h3>
               <p style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 IBM · Sep 2024
                 <ExternalLink size={12} />
@@ -277,16 +387,8 @@ const App = () => {
           <div className="hero-tag">STACK</div>
           <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Tech Arsenal</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }}>
-            {['C++', 'JAVA', 'PYTHON', 'REACT', 'NODE.JS', 'MYSQL', 'GIT', 'PHP'].map(tool => (
-              <div
-                key={tool}
-                className="card"
-                style={{ textAlign: 'center', padding: '1.5rem' }}
-                onMouseEnter={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: true }))}
-                onMouseLeave={() => window.dispatchEvent(new CustomEvent('cursorHover', { detail: false }))}
-              >
-                <p style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)' }}>{tool}</p>
-              </div>
+            {skillsData.map(skill => (
+              <StackSkillCard key={skill.name} name={skill.name} percentage={skill.percentage} />
             ))}
           </div>
         </section>

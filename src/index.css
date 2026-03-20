@@ -193,16 +193,82 @@ section {
   position: relative;
   width: 100%;
   max-width: 250px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.profile-image-container:hover {
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+  transform: translateY(-5px);
+  border-color: #fff;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-color);
 }
 
 .profile-image-container img {
   width: 100%;
   display: block;
-  transition: transform 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cv-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 242, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #000;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.profile-image-container:hover .cv-overlay {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .profile-image-container:hover img {
-  transform: scale(1.02);
+  transform: scale(1.15) rotate(5deg);
+  filter: grayscale(100%) blur(3px);
+  opacity: 0.3;
+}
+
+.profile-label {
+  position: absolute;
+  bottom: -20px;
+  left: -1px;
+  background: var(--bg-color);
+  padding: 5px 15px;
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  border: 1px solid var(--accent-cyan);
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.profile-image-container:hover .profile-label {
+  background: var(--accent-cyan);
+  color: #000;
+  border-color: var(--accent-cyan);
 }
 
 .card {
@@ -247,6 +313,110 @@ section {
   color: var(--text-muted);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2px 8px;
+}
+
+.project-image-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 300px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-image-wrapper:hover {
+  transform: translateY(-5px);
+  border-color: #ff9800;
+  box-shadow: 0 10px 30px rgba(255, 152, 0, 0.2);
+}
+
+.project-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: transform 0.5s ease;
+  background-color: #111; /* fallback color */
+}
+
+.project-image-wrapper:hover .project-bg {
+  transform: scale(1.1);
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 20, 0.85); /* Dark tint */
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.project-image-wrapper:hover .project-overlay {
+  background: rgba(10, 10, 20, 0.4);
+}
+
+.project-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.project-image-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  font-family: var(--font-heading);
+}
+
+.project-image-subtitle {
+  color: #ffb74d; /* Yellow/Orange */
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+  font-weight: 500;
+}
+
+.project-view-btn {
+  background: transparent;
+  border: 2px solid #ff9800;
+  color: #ff9800;
+  padding: 0.6rem 2rem;
+  border-radius: 30px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.project-image-wrapper:hover .project-view-btn {
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(255, 152, 0, 0.1);
 }
 
 @media (max-width: 1024px) {
