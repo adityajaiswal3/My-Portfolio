@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Home, User, Briefcase, Cpu, Mail } from "lucide-react"
+import { Home, User, Briefcase, Cpu, Mail, Award, Trophy } from "lucide-react"
 import { AnimeNavBar } from "./anime-navbar"
 
 const items = [
@@ -16,13 +16,23 @@ const items = [
     icon: User,
   },
   {
-    name: "Experience",
-    url: "#experience",
+    name: "Projects",
+    url: "#projects",
     icon: Briefcase,
   },
   {
-    name: "Stack",
-    url: "#stack",
+    name: "Achievements",
+    url: "#achievements",
+    icon: Trophy,
+  },
+  {
+    name: "Certificates",
+    url: "#certifications",
+    icon: Award,
+  },
+  {
+    name: "Skills",
+    url: "#skills",
     icon: Cpu,
   },
   {

@@ -249,7 +249,7 @@ const App = () => {
 
         {/* ABOUT SECTION */}
         <section id="about">
-          <h2 style={{ fontSize: '10vw', marginBottom: '5rem' }}>The Profile</h2>
+          <h2 style={{ fontSize: '7vw', marginBottom: '5rem' }}>The Profile</h2>
           <div className="grid-2">
             <div>
               <a
@@ -302,8 +302,8 @@ const App = () => {
         </section>
 
         {/* PROJECTS SECTION */}
-        <section id="experience">
-          <h2 style={{ fontSize: '8vw', marginBottom: '5rem' }}>Projects &<br />Success</h2>
+        <section id="projects">
+          <h2 style={{ fontSize: '8vw', marginBottom: '5rem' }}>Projects</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
             <ProjectImageCard
               title="Hospital Patient Record System"
@@ -319,11 +319,19 @@ const App = () => {
               link="https://github.com/adityajaiswal3/-building-materials-project"
               description="Engineered a scalable e-commerce platform dedicated to managing and selling building materials through an interactive web interface. The robust backend, handled via PHP and HTML, ensures a smooth shopping experience and inventory tracking. It is targeted at maximizing user-experience while simplifying operations for material vendors."
             />
+          </div>
+        </section>
+
+        {/* ACHIEVEMENTS SECTION */}
+        <section id="achievements">
+          <div className="hero-tag">ACHIEVEMENTS</div>
+          <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Success</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
             <ProjectImageCard
               title="CyberSec Symposium 2.0"
               subtitle="Cyber Conference @ LPU"
               image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80"
-              link="https://www.lpu.in"
+              link="/cybersec_certificate.jpg.jpg"
               buttonText="View Details"
               description="Actively participated in North India's largest cybersecurity conference, delving deep into advanced network security and ethical hacking challenges. Engaged in hands-on workshops alongside top-tier professionals to gain practical insights into the evolving landscape of digital security and data protection strategies."
             />
@@ -394,9 +402,9 @@ const App = () => {
           </div>
         </section>
 
-        {/* STACK SECTION */}
-        <section id="stack">
-          <div className="hero-tag">STACK</div>
+        {/* SKILLS SECTION */}
+        <section id="skills">
+          <div className="hero-tag">SKILLS</div>
           <h2 style={{ fontSize: '6vw', marginBottom: '5rem' }}>Technical Skills</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }}>
             {skillsData.map(skill => (
